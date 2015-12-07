@@ -1,22 +1,22 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : MySQL
-Source Server Version : 50519
+Source Server         : localhost_3306
+Source Server Version : 50627
 Source Host           : localhost:3306
 Source Database       : pet_health_care
 
 Target Server Type    : MYSQL
-Target Server Version : 50519
+Target Server Version : 50627
 File Encoding         : 65001
 
-Date: 2015-12-06 22:35:43
+Date: 2015-12-07 13:08:11
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for `acttraining`
+-- Table structure for acttraining
 -- ----------------------------
 DROP TABLE IF EXISTS `acttraining`;
 CREATE TABLE `acttraining` (
@@ -37,13 +37,13 @@ CREATE TABLE `acttraining` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `appointment`
+-- Table structure for appointment
 -- ----------------------------
 DROP TABLE IF EXISTS `appointment`;
 CREATE TABLE `appointment` (
   `apID` varchar(255) NOT NULL,
   `apUsername` varchar(255) NOT NULL,
-  `apPetID` varchar(255) NOT NULL,
+  `apPetID` int(255) NOT NULL,
   `apDate` date NOT NULL,
   `apTime` date NOT NULL,
   `apHosptial` varchar(255) NOT NULL,
@@ -60,7 +60,7 @@ CREATE TABLE `appointment` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `cat`
+-- Table structure for cat
 -- ----------------------------
 DROP TABLE IF EXISTS `cat`;
 CREATE TABLE `cat` (
@@ -117,7 +117,7 @@ INSERT INTO `cat` VALUES ('42', '中华田园猫');
 INSERT INTO `cat` VALUES ('43', '重点色短毛猫');
 
 -- ----------------------------
--- Table structure for `dailyhealth`
+-- Table structure for dailyhealth
 -- ----------------------------
 DROP TABLE IF EXISTS `dailyhealth`;
 CREATE TABLE `dailyhealth` (
@@ -138,7 +138,7 @@ CREATE TABLE `dailyhealth` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `doctor`
+-- Table structure for doctor
 -- ----------------------------
 DROP TABLE IF EXISTS `doctor`;
 CREATE TABLE `doctor` (
@@ -155,7 +155,7 @@ CREATE TABLE `doctor` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `dog`
+-- Table structure for dog
 -- ----------------------------
 DROP TABLE IF EXISTS `dog`;
 CREATE TABLE `dog` (
@@ -212,11 +212,11 @@ INSERT INTO `dog` VALUES ('42', '英国斗牛犬');
 INSERT INTO `dog` VALUES ('43', '中国沙皮犬 \r\n中国沙皮犬 \r\n中国沙皮犬 \r\n中国沙皮犬 \r\n中国沙皮犬');
 
 -- ----------------------------
--- Table structure for `pet`
+-- Table structure for pet
 -- ----------------------------
 DROP TABLE IF EXISTS `pet`;
 CREATE TABLE `pet` (
-  `PetID` varchar(255) NOT NULL,
+  `PetID` int(255) NOT NULL AUTO_INCREMENT,
   `PetName` varchar(255) NOT NULL,
   `Ownername` varchar(255) NOT NULL,
   `PetSex` tinyint(1) NOT NULL,
@@ -233,7 +233,7 @@ CREATE TABLE `pet` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `qanda`
+-- Table structure for qanda
 -- ----------------------------
 DROP TABLE IF EXISTS `qanda`;
 CREATE TABLE `qanda` (
@@ -251,7 +251,7 @@ CREATE TABLE `qanda` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `recommendation`
+-- Table structure for recommendation
 -- ----------------------------
 DROP TABLE IF EXISTS `recommendation`;
 CREATE TABLE `recommendation` (
@@ -268,7 +268,7 @@ CREATE TABLE `recommendation` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `treatmentfeedback`
+-- Table structure for treatmentfeedback
 -- ----------------------------
 DROP TABLE IF EXISTS `treatmentfeedback`;
 CREATE TABLE `treatmentfeedback` (
@@ -285,13 +285,13 @@ CREATE TABLE `treatmentfeedback` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `treatmentrecord`
+-- Table structure for treatmentrecord
 -- ----------------------------
 DROP TABLE IF EXISTS `treatmentrecord`;
 CREATE TABLE `treatmentrecord` (
   `trID` varchar(255) NOT NULL,
   `trUsername` varchar(255) NOT NULL,
-  `trPetID` varchar(255) NOT NULL,
+  `trPetID` int(255) NOT NULL,
   `trDrID` varchar(255) NOT NULL,
   `trDate` date NOT NULL,
   `trTopic` varchar(255) NOT NULL,
@@ -313,7 +313,7 @@ CREATE TABLE `treatmentrecord` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `user`
+-- Table structure for user
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
