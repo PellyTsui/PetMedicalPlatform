@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50627
 File Encoding         : 65001
 
-Date: 2015-12-07 13:08:11
+Date: 2015-12-14 12:59:05
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -142,11 +142,12 @@ CREATE TABLE `dailyhealth` (
 -- ----------------------------
 DROP TABLE IF EXISTS `doctor`;
 CREATE TABLE `doctor` (
-  `DrID` varchar(255) NOT NULL,
+  `DrID` int(255) NOT NULL AUTO_INCREMENT,
   `DrName` varchar(255) NOT NULL,
   `DrIntro` varchar(255) NOT NULL,
   `DrGoodAt` varchar(255) NOT NULL,
   `DrHosptl` varchar(255) NOT NULL,
+  `state` tinyint(4) NOT NULL,
   PRIMARY KEY (`DrID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -292,7 +293,7 @@ CREATE TABLE `treatmentrecord` (
   `trID` varchar(255) NOT NULL,
   `trUsername` varchar(255) NOT NULL,
   `trPetID` int(255) NOT NULL,
-  `trDrID` varchar(255) NOT NULL,
+  `trDrID` int(255) NOT NULL,
   `trDate` date NOT NULL,
   `trTopic` varchar(255) NOT NULL,
   `trContent` varchar(6000) NOT NULL,
