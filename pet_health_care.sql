@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50519
 File Encoding         : 65001
 
-Date: 2015-12-26 23:19:39
+Date: 2016-01-16 23:37:08
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -58,6 +58,32 @@ CREATE TABLE `appointment` (
 -- ----------------------------
 -- Records of appointment
 -- ----------------------------
+
+-- ----------------------------
+-- Table structure for `article`
+-- ----------------------------
+DROP TABLE IF EXISTS `article`;
+CREATE TABLE `article` (
+  `ArticleId` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `content` mediumtext NOT NULL,
+  `tag1` varchar(255) DEFAULT NULL,
+  `tag2` varchar(255) DEFAULT NULL,
+  `date` date NOT NULL,
+  `DrId` int(11) NOT NULL,
+  `Drname` varchar(255) NOT NULL,
+  `state` tinyint(1) unsigned zerofill NOT NULL DEFAULT '0',
+  PRIMARY KEY (`ArticleId`),
+  KEY `DrId` (`DrId`),
+  CONSTRAINT `DrId` FOREIGN KEY (`DrId`) REFERENCES `doctor` (`DrID`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of article
+-- ----------------------------
+INSERT INTO `article` VALUES ('3', '哈哈哈哈', '哈哈哈哈哈哈哈哈哈哈哈哈哈哈', '狗', '行为', '2016-01-16', '2', '李四', '0');
+INSERT INTO `article` VALUES ('4', '啊啊啊啊啊啊', '啊啊啊啊啊啊啊啊啊啊啊啊', '猫', '养护', '2016-01-16', '2', '李四', '0');
+INSERT INTO `article` VALUES ('5', '2222', '啊啊啊啊 按法定分 发到发', '猫', '养护', '2016-01-16', '2', '李四', '0');
 
 -- ----------------------------
 -- Table structure for `cat`
@@ -153,13 +179,17 @@ CREATE TABLE `doctor` (
   `state` tinyint(1) unsigned zerofill NOT NULL DEFAULT '0',
   `locate` int(4) NOT NULL,
   PRIMARY KEY (`DrID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of doctor
 -- ----------------------------
-INSERT INTO `doctor` VALUES ('1', 'null', 'null', 'null', 'null', 'adff', 'dfaa', 'ad', '0', '4');
-INSERT INTO `doctor` VALUES ('2', 'aaa', '111111', '12345678901', 'ari-sa@163.com', 'adf', 'adf', 'af', '1', '1');
+INSERT INTO `doctor` VALUES ('1', '张三', '123456', '111', 'ari-sa@163.com', '111', '111', '222', '1', '4');
+INSERT INTO `doctor` VALUES ('2', '李四', '123456', '12345678901', 'ari-sa@163.com', 'adf', 'adf', 'af', '1', '1');
+INSERT INTO `doctor` VALUES ('4', 'åå', '123456', '12345678901', '123@11.com', 'd', 'd', 'd', '0', '0');
+INSERT INTO `doctor` VALUES ('5', 'åå', '123456', '11111111111', 'sd@qq.com', 'f', 'f', 'f', '0', '0');
+INSERT INTO `doctor` VALUES ('6', 'åå', '123456', '11111111111', '11@11.com', '1', '1', '1', '0', '3');
+INSERT INTO `doctor` VALUES ('7', '哈哈', '123456', '11111111111', '12@11.com', 'f', 'f', 'f', '0', '0');
 
 -- ----------------------------
 -- Table structure for `dog`
@@ -339,3 +369,4 @@ CREATE TABLE `user` (
 -- ----------------------------
 INSERT INTO `user` VALUES ('a', '222222', 'ari-sa@163.com', '11111111111', '1', '1', '86156907c7fac5b12852978a6959cb28');
 INSERT INTO `user` VALUES ('ä½ ', '111111', '1@333.com', '11111111111', '2', '0', null);
+INSERT INTO `user` VALUES ('呵呵', '123456', 'aririsa@163.com', '12345678901', '3', '1', null);
