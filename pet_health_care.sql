@@ -10,10 +10,28 @@ Target Server Type    : MYSQL
 Target Server Version : 50519
 File Encoding         : 65001
 
-Date: 2016-01-31 23:12:23
+Date: 2016-02-12 23:51:14
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for ` antiepidemicrecord`
+-- ----------------------------
+DROP TABLE IF EXISTS ` antiepidemicrecord`;
+CREATE TABLE ` antiepidemicrecord` (
+  `antiId` int(11) NOT NULL AUTO_INCREMENT,
+  `petId` int(11) NOT NULL,
+  `antitype` int(3) NOT NULL,
+  `date` date NOT NULL,
+  PRIMARY KEY (`antiId`),
+  KEY `petId` (`petId`),
+  CONSTRAINT `petId` FOREIGN KEY (`petId`) REFERENCES `pet` (`PetID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of  antiepidemicrecord
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `acttraining`
@@ -197,7 +215,7 @@ CREATE TABLE `doctor` (
   `state` tinyint(1) unsigned zerofill NOT NULL DEFAULT '0',
   `locate` int(4) NOT NULL,
   PRIMARY KEY (`DrID`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of doctor
@@ -274,23 +292,28 @@ CREATE TABLE `pet` (
   `PetName` varchar(255) NOT NULL,
   `Ownername` varchar(255) NOT NULL,
   `PetSex` tinyint(1) NOT NULL,
-  `PetAge` double(80,0) NOT NULL,
+  `PetBirth` date NOT NULL,
   `PetType` varchar(255) NOT NULL,
   `PetKind` varchar(255) NOT NULL,
+  `ancestry` tinyint(1) NOT NULL,
+  `neuter` tinyint(1) NOT NULL,
   PRIMARY KEY (`PetID`),
   KEY `Owner_Pet` (`Ownername`),
   CONSTRAINT `Owner_Pet` FOREIGN KEY (`Ownername`) REFERENCES `user` (`Username`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of pet
 -- ----------------------------
+INSERT INTO `pet` VALUES ('1', '哈哈', '呵呵', '0', '2016-02-03', '1', '埃及猫 ', '1', '0');
+INSERT INTO `pet` VALUES ('2', '哈哈', '呵呵', '0', '2016-02-03', '1', '埃及猫 ', '1', '0');
+INSERT INTO `pet` VALUES ('3', '啊', '呵呵', '2', '2016-02-04', '0', '阿富汗猎犬', '2', '1');
 
 -- ----------------------------
--- Table structure for `qanda`
+-- Table structure for `qna`
 -- ----------------------------
-DROP TABLE IF EXISTS `qanda`;
-CREATE TABLE `qanda` (
+DROP TABLE IF EXISTS `qna`;
+CREATE TABLE `qna` (
   `qnaID` varchar(255) NOT NULL,
   `qnaKey` varchar(255) NOT NULL,
   `qnaType` varchar(255) NOT NULL,
@@ -301,7 +324,7 @@ CREATE TABLE `qanda` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of qanda
+-- Records of qna
 -- ----------------------------
 
 -- ----------------------------
