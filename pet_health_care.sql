@@ -10,16 +10,16 @@ Target Server Type    : MYSQL
 Target Server Version : 50519
 File Encoding         : 65001
 
-Date: 2016-02-12 23:51:14
+Date: 2016-02-20 00:18:04
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for ` antiepidemicrecord`
+-- Table structure for ` antirecord`
 -- ----------------------------
-DROP TABLE IF EXISTS ` antiepidemicrecord`;
-CREATE TABLE ` antiepidemicrecord` (
+DROP TABLE IF EXISTS ` antirecord`;
+CREATE TABLE ` antirecord` (
   `antiId` int(11) NOT NULL AUTO_INCREMENT,
   `petId` int(11) NOT NULL,
   `antitype` int(3) NOT NULL,
@@ -27,11 +27,12 @@ CREATE TABLE ` antiepidemicrecord` (
   PRIMARY KEY (`antiId`),
   KEY `petId` (`petId`),
   CONSTRAINT `petId` FOREIGN KEY (`petId`) REFERENCES `pet` (`PetID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of  antiepidemicrecord
+-- Records of  antirecord
 -- ----------------------------
+INSERT INTO ` antirecord` VALUES ('1', '1', '2', '2016-02-07');
 
 -- ----------------------------
 -- Table structure for `acttraining`
@@ -300,14 +301,15 @@ CREATE TABLE `pet` (
   PRIMARY KEY (`PetID`),
   KEY `Owner_Pet` (`Ownername`),
   CONSTRAINT `Owner_Pet` FOREIGN KEY (`Ownername`) REFERENCES `user` (`Username`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of pet
 -- ----------------------------
-INSERT INTO `pet` VALUES ('1', '哈哈', '呵呵', '0', '2016-02-03', '1', '埃及猫 ', '1', '0');
+INSERT INTO `pet` VALUES ('1', '哈哈', '呵呵', '1', '2016-02-03', '1', '埃及猫 ', '1', '1');
 INSERT INTO `pet` VALUES ('2', '哈哈', '呵呵', '0', '2016-02-03', '1', '埃及猫 ', '1', '0');
 INSERT INTO `pet` VALUES ('3', '啊', '呵呵', '2', '2016-02-04', '0', '阿富汗猎犬', '2', '1');
+INSERT INTO `pet` VALUES ('4', '22', '呵呵', '2', '2012-11-07', '0', '巴哥犬', '1', '1');
 
 -- ----------------------------
 -- Table structure for `qna`
