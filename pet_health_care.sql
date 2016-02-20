@@ -10,50 +10,10 @@ Target Server Type    : MYSQL
 Target Server Version : 50519
 File Encoding         : 65001
 
-Date: 2016-02-20 00:18:04
+Date: 2016-02-21 00:15:58
 */
 
 SET FOREIGN_KEY_CHECKS=0;
-
--- ----------------------------
--- Table structure for ` antirecord`
--- ----------------------------
-DROP TABLE IF EXISTS ` antirecord`;
-CREATE TABLE ` antirecord` (
-  `antiId` int(11) NOT NULL AUTO_INCREMENT,
-  `petId` int(11) NOT NULL,
-  `antitype` int(3) NOT NULL,
-  `date` date NOT NULL,
-  PRIMARY KEY (`antiId`),
-  KEY `petId` (`petId`),
-  CONSTRAINT `petId` FOREIGN KEY (`petId`) REFERENCES `pet` (`PetID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of  antirecord
--- ----------------------------
-INSERT INTO ` antirecord` VALUES ('1', '1', '2', '2016-02-07');
-
--- ----------------------------
--- Table structure for `acttraining`
--- ----------------------------
-DROP TABLE IF EXISTS `acttraining`;
-CREATE TABLE `acttraining` (
-  `ActID` varchar(255) NOT NULL,
-  `ActType` int(10) NOT NULL,
-  `ActPet` int(10) NOT NULL,
-  `ActTopic` varchar(255) NOT NULL,
-  `ActContent` varchar(6000) NOT NULL,
-  `ActAuthor` varchar(255) NOT NULL,
-  `ActDate` date NOT NULL,
-  `ActPic` varchar(255) DEFAULT NULL,
-  `state` int(5) NOT NULL,
-  PRIMARY KEY (`ActID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of acttraining
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for `admin`
@@ -70,6 +30,25 @@ CREATE TABLE `admin` (
 -- Records of admin
 -- ----------------------------
 INSERT INTO `admin` VALUES ('1', 'adminadmin', 'admin');
+
+-- ----------------------------
+-- Table structure for `antirecord`
+-- ----------------------------
+DROP TABLE IF EXISTS `antirecord`;
+CREATE TABLE `antirecord` (
+  `antiId` int(11) NOT NULL AUTO_INCREMENT,
+  `petId` int(11) NOT NULL,
+  `antitype` int(3) NOT NULL,
+  `date` date NOT NULL,
+  PRIMARY KEY (`antiId`),
+  KEY `petId` (`petId`),
+  CONSTRAINT `petId` FOREIGN KEY (`petId`) REFERENCES `pet` (`PetID`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of antirecord
+-- ----------------------------
+INSERT INTO `antirecord` VALUES ('3', '1', '2', '2016-02-02');
 
 -- ----------------------------
 -- Table structure for `appointment`
@@ -178,27 +157,6 @@ INSERT INTO `cat` VALUES ('40', '英国短毛猫');
 INSERT INTO `cat` VALUES ('41', '中国狸花猫');
 INSERT INTO `cat` VALUES ('42', '中华田园猫');
 INSERT INTO `cat` VALUES ('43', '重点色短毛猫');
-
--- ----------------------------
--- Table structure for `dailyhealth`
--- ----------------------------
-DROP TABLE IF EXISTS `dailyhealth`;
-CREATE TABLE `dailyhealth` (
-  `dahlID` varchar(255) NOT NULL,
-  `dahlType` varchar(255) NOT NULL,
-  `dahlPet` int(10) NOT NULL,
-  `dahlTopic` varchar(255) NOT NULL,
-  `dahlContent` varchar(6000) NOT NULL,
-  `dahlAuthor` varchar(255) NOT NULL,
-  `dahlDate` date NOT NULL,
-  `dahlPic` varchar(255) DEFAULT NULL,
-  `state` int(5) NOT NULL,
-  PRIMARY KEY (`dahlID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of dailyhealth
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for `doctor`
@@ -330,65 +288,51 @@ CREATE TABLE `qna` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `recommendation`
+-- Table structure for `transwer`
 -- ----------------------------
-DROP TABLE IF EXISTS `recommendation`;
-CREATE TABLE `recommendation` (
-  `recID` varchar(255) NOT NULL,
-  `recType` varchar(255) NOT NULL,
-  `recPet` int(10) NOT NULL,
-  `recContent` varchar(6000) NOT NULL,
-  `recPic` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`recID`)
+DROP TABLE IF EXISTS `transwer`;
+CREATE TABLE `transwer` (
+  `Taid` int(11) NOT NULL,
+  `Trid` int(11) NOT NULL,
+  `did` int(11) NOT NULL,
+  `petId` int(11) NOT NULL,
+  `tacontent` mediumtext NOT NULL,
+  `date` date NOT NULL,
+  `state` int(11) NOT NULL,
+  PRIMARY KEY (`Taid`),
+  KEY `Trid` (`Trid`),
+  KEY `did` (`did`),
+  CONSTRAINT `did` FOREIGN KEY (`did`) REFERENCES `doctor` (`DrID`),
+  CONSTRAINT `Trid` FOREIGN KEY (`Trid`) REFERENCES `trquestion` (`TrId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of recommendation
+-- Records of transwer
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `treatmentfeedback`
+-- Table structure for `trquestion`
 -- ----------------------------
-DROP TABLE IF EXISTS `treatmentfeedback`;
-CREATE TABLE `treatmentfeedback` (
-  `tfbID` varchar(255) NOT NULL,
-  `tfbTID` varchar(255) NOT NULL,
-  `tfbContent` varchar(6000) NOT NULL,
-  PRIMARY KEY (`tfbID`),
-  KEY `Treat_Feedback` (`tfbTID`),
-  CONSTRAINT `Treat_Feedback` FOREIGN KEY (`tfbTID`) REFERENCES `treatmentrecord` (`trID`) ON DELETE CASCADE ON UPDATE CASCADE
+DROP TABLE IF EXISTS `trquestion`;
+CREATE TABLE `trquestion` (
+  `TrId` int(11) NOT NULL AUTO_INCREMENT,
+  `Username` varchar(255) NOT NULL,
+  `pid` int(11) NOT NULL,
+  `Trtype` int(11) NOT NULL,
+  `TrSubtype` int(11) NOT NULL,
+  `TrTitle` varchar(255) NOT NULL,
+  `TrContent` mediumtext NOT NULL,
+  `date` date NOT NULL,
+  `state` int(11) NOT NULL,
+  PRIMARY KEY (`TrId`),
+  KEY `Username` (`Username`),
+  KEY `pid` (`pid`),
+  CONSTRAINT `Username` FOREIGN KEY (`Username`) REFERENCES `user` (`Username`),
+  CONSTRAINT `pid` FOREIGN KEY (`pid`) REFERENCES `pet` (`PetID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of treatmentfeedback
--- ----------------------------
-
--- ----------------------------
--- Table structure for `treatmentrecord`
--- ----------------------------
-DROP TABLE IF EXISTS `treatmentrecord`;
-CREATE TABLE `treatmentrecord` (
-  `trID` varchar(255) NOT NULL,
-  `trUsername` varchar(255) NOT NULL,
-  `trPetID` int(255) NOT NULL,
-  `trDrID` int(255) NOT NULL,
-  `trDate` date NOT NULL,
-  `trTopic` varchar(255) NOT NULL,
-  `trContent` varchar(6000) NOT NULL,
-  `trKey` varchar(255) NOT NULL,
-  `trAnswer` varchar(6000) NOT NULL,
-  `trFeedBackState` tinyint(1) NOT NULL,
-  PRIMARY KEY (`trID`),
-  KEY `Treat_Username` (`trUsername`),
-  KEY `Treat_Pet` (`trPetID`),
-  KEY `Treat_Dr` (`trDrID`),
-  CONSTRAINT `Treat_Dr` FOREIGN KEY (`trDrID`) REFERENCES `doctor` (`DrID`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  CONSTRAINT `Treat_Pet` FOREIGN KEY (`trPetID`) REFERENCES `pet` (`PetID`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  CONSTRAINT `Treat_Username` FOREIGN KEY (`trUsername`) REFERENCES `user` (`Username`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of treatmentrecord
+-- Records of trquestion
 -- ----------------------------
 
 -- ----------------------------
