@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50519
 File Encoding         : 65001
 
-Date: 2016-02-21 00:15:58
+Date: 2016-02-23 23:34:09
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -317,7 +317,7 @@ DROP TABLE IF EXISTS `trquestion`;
 CREATE TABLE `trquestion` (
   `TrId` int(11) NOT NULL AUTO_INCREMENT,
   `Username` varchar(255) NOT NULL,
-  `pid` int(11) NOT NULL,
+  `pid` int(255) NOT NULL,
   `Trtype` int(11) NOT NULL,
   `TrSubtype` int(11) NOT NULL,
   `TrTitle` varchar(255) NOT NULL,
@@ -325,15 +325,16 @@ CREATE TABLE `trquestion` (
   `date` date NOT NULL,
   `state` int(11) NOT NULL,
   PRIMARY KEY (`TrId`),
-  KEY `Username` (`Username`),
-  KEY `pid` (`pid`),
-  CONSTRAINT `Username` FOREIGN KEY (`Username`) REFERENCES `user` (`Username`),
-  CONSTRAINT `pid` FOREIGN KEY (`pid`) REFERENCES `pet` (`PetID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  KEY `userName` (`Username`),
+  KEY `petpet` (`pid`),
+  CONSTRAINT `petpet` FOREIGN KEY (`pid`) REFERENCES `pet` (`PetID`),
+  CONSTRAINT `userName` FOREIGN KEY (`Username`) REFERENCES `user` (`Username`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of trquestion
 -- ----------------------------
+INSERT INTO `trquestion` VALUES ('4', '呵呵', '1', '0', '2', '阿道夫', '阿道夫啊爱妃', '2016-02-23', '0');
 
 -- ----------------------------
 -- Table structure for `user`
