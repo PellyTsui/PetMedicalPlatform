@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50519
 File Encoding         : 65001
 
-Date: 2016-02-23 23:34:09
+Date: 2016-02-27 23:11:40
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -292,23 +292,29 @@ CREATE TABLE `qna` (
 -- ----------------------------
 DROP TABLE IF EXISTS `transwer`;
 CREATE TABLE `transwer` (
-  `Taid` int(11) NOT NULL,
+  `Taid` int(11) NOT NULL AUTO_INCREMENT,
   `Trid` int(11) NOT NULL,
+  `Username` varchar(255) NOT NULL,
   `did` int(11) NOT NULL,
-  `petId` int(11) NOT NULL,
+  `petId` int(255) NOT NULL,
   `tacontent` mediumtext NOT NULL,
   `date` date NOT NULL,
-  `state` int(11) NOT NULL,
+  `state` int(11) DEFAULT NULL,
   PRIMARY KEY (`Taid`),
   KEY `Trid` (`Trid`),
   KEY `did` (`did`),
+  KEY `ppid` (`petId`),
+  KEY `owner` (`Username`),
   CONSTRAINT `did` FOREIGN KEY (`did`) REFERENCES `doctor` (`DrID`),
+  CONSTRAINT `owner` FOREIGN KEY (`Username`) REFERENCES `user` (`Username`),
+  CONSTRAINT `ppid` FOREIGN KEY (`petId`) REFERENCES `pet` (`PetID`),
   CONSTRAINT `Trid` FOREIGN KEY (`Trid`) REFERENCES `trquestion` (`TrId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of transwer
 -- ----------------------------
+INSERT INTO `transwer` VALUES ('4', '5', '呵呵', '2', '4', '爱的发的发发发达大厦发送发送方', '2016-02-27', '0');
 
 -- ----------------------------
 -- Table structure for `trquestion`
@@ -329,12 +335,13 @@ CREATE TABLE `trquestion` (
   KEY `petpet` (`pid`),
   CONSTRAINT `petpet` FOREIGN KEY (`pid`) REFERENCES `pet` (`PetID`),
   CONSTRAINT `userName` FOREIGN KEY (`Username`) REFERENCES `user` (`Username`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of trquestion
 -- ----------------------------
 INSERT INTO `trquestion` VALUES ('4', '呵呵', '1', '0', '2', '阿道夫', '阿道夫啊爱妃', '2016-02-23', '0');
+INSERT INTO `trquestion` VALUES ('5', '呵呵', '4', '1', '1', '啊啊啊', '睇到的的的的的爱的发啊发', '2016-02-27', '2');
 
 -- ----------------------------
 -- Table structure for `user`
