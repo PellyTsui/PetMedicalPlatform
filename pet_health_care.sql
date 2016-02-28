@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50519
 File Encoding         : 65001
 
-Date: 2016-02-27 23:11:40
+Date: 2016-02-28 23:06:46
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -296,6 +296,7 @@ CREATE TABLE `transwer` (
   `Trid` int(11) NOT NULL,
   `Username` varchar(255) NOT NULL,
   `did` int(11) NOT NULL,
+  `drName` varchar(255) NOT NULL,
   `petId` int(255) NOT NULL,
   `tacontent` mediumtext NOT NULL,
   `date` date NOT NULL,
@@ -314,7 +315,7 @@ CREATE TABLE `transwer` (
 -- ----------------------------
 -- Records of transwer
 -- ----------------------------
-INSERT INTO `transwer` VALUES ('4', '5', '呵呵', '2', '4', '爱的发的发发发达大厦发送发送方', '2016-02-27', '0');
+INSERT INTO `transwer` VALUES ('4', '5', '呵呵', '2', '李四', '4', '爱的发的发发发达大厦发送发送方', '2016-02-27', '0');
 
 -- ----------------------------
 -- Table structure for `trquestion`
