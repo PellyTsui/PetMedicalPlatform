@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50519
 File Encoding         : 65001
 
-Date: 2016-02-28 23:06:46
+Date: 2016-03-05 22:56:13
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -173,17 +173,18 @@ CREATE TABLE `doctor` (
   `DrHosptl` varchar(255) NOT NULL,
   `state` tinyint(1) unsigned zerofill NOT NULL DEFAULT '0',
   `locate` int(4) NOT NULL,
+  `image` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`DrID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of doctor
 -- ----------------------------
-INSERT INTO `doctor` VALUES ('1', '张三', '123456', '111', 'ari-sa@163.com', '111', '111', '222', '1', '4');
-INSERT INTO `doctor` VALUES ('2', '李四', '123456', '12345678901', 'ari-sa@163.com', 'adf', 'adf', 'af', '1', '1');
-INSERT INTO `doctor` VALUES ('4', 'åå', '123456', '12345678901', '123@11.com', 'd', 'd', 'd', '0', '0');
-INSERT INTO `doctor` VALUES ('5', 'åå', '123456', '11111111111', 'sd@qq.com', 'f', 'f', 'f', '0', '0');
-INSERT INTO `doctor` VALUES ('6', 'åå', '123456', '11111111111', '11@11.com', '1', '1', '1', '0', '3');
+INSERT INTO `doctor` VALUES ('1', '张三', '123456', '111', 'ari-sa@163.com', '111', '111', '222', '1', '4', null);
+INSERT INTO `doctor` VALUES ('2', '李四', '123456', '12345678901', 'ari-sa@163.com', 'adf', 'adf', 'af', '1', '1', null);
+INSERT INTO `doctor` VALUES ('4', 'åå', '123456', '12345678901', '123@11.com', 'd', 'd', 'd', '0', '0', null);
+INSERT INTO `doctor` VALUES ('5', 'åå', '123456', '11111111111', 'sd@qq.com', 'f', 'f', 'f', '0', '0', null);
+INSERT INTO `doctor` VALUES ('6', 'åå', '123456', '11111111111', '11@11.com', '1', '1', '1', '0', '3', null);
 
 -- ----------------------------
 -- Table structure for `dog`
@@ -256,6 +257,7 @@ CREATE TABLE `pet` (
   `PetKind` varchar(255) NOT NULL,
   `ancestry` tinyint(1) NOT NULL,
   `neuter` tinyint(1) NOT NULL,
+  `image` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`PetID`),
   KEY `Owner_Pet` (`Ownername`),
   CONSTRAINT `Owner_Pet` FOREIGN KEY (`Ownername`) REFERENCES `user` (`Username`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -264,10 +266,10 @@ CREATE TABLE `pet` (
 -- ----------------------------
 -- Records of pet
 -- ----------------------------
-INSERT INTO `pet` VALUES ('1', '哈哈', '呵呵', '1', '2016-02-03', '1', '埃及猫 ', '1', '1');
-INSERT INTO `pet` VALUES ('2', '哈哈', '呵呵', '0', '2016-02-03', '1', '埃及猫 ', '1', '0');
-INSERT INTO `pet` VALUES ('3', '啊', '呵呵', '2', '2016-02-04', '0', '阿富汗猎犬', '2', '1');
-INSERT INTO `pet` VALUES ('4', '22', '呵呵', '2', '2012-11-07', '0', '巴哥犬', '1', '1');
+INSERT INTO `pet` VALUES ('1', '哈哈', '呵呵', '1', '2016-02-03', '1', '埃及猫 ', '1', '1', null);
+INSERT INTO `pet` VALUES ('2', '哈哈', '呵呵', '0', '2016-02-03', '1', '埃及猫 ', '1', '0', null);
+INSERT INTO `pet` VALUES ('3', '啊', '呵呵', '2', '2016-02-04', '0', '阿富汗猎犬', '2', '1', null);
+INSERT INTO `pet` VALUES ('4', '22', '呵呵', '2', '2012-11-07', '0', '巴哥犬', '1', '1', null);
 
 -- ----------------------------
 -- Table structure for `qna`
@@ -310,12 +312,14 @@ CREATE TABLE `transwer` (
   CONSTRAINT `owner` FOREIGN KEY (`Username`) REFERENCES `user` (`Username`),
   CONSTRAINT `ppid` FOREIGN KEY (`petId`) REFERENCES `pet` (`PetID`),
   CONSTRAINT `Trid` FOREIGN KEY (`Trid`) REFERENCES `trquestion` (`TrId`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of transwer
 -- ----------------------------
 INSERT INTO `transwer` VALUES ('4', '5', '呵呵', '2', '李四', '4', '爱的发的发发发达大厦发送发送方', '2016-02-27', '0');
+INSERT INTO `transwer` VALUES ('5', '6', '呵呵', '1', '张三', '2', '按法定分打发啊发生的发生的爱妃啊发达爱上啊爱上啊啊 ', '2016-03-01', '0');
+INSERT INTO `transwer` VALUES ('6', '7', '呵呵', '1', '张三', '2', '打发发发达爱妃啊', '2016-03-01', '0');
 
 -- ----------------------------
 -- Table structure for `trquestion`
@@ -336,13 +340,15 @@ CREATE TABLE `trquestion` (
   KEY `petpet` (`pid`),
   CONSTRAINT `petpet` FOREIGN KEY (`pid`) REFERENCES `pet` (`PetID`),
   CONSTRAINT `userName` FOREIGN KEY (`Username`) REFERENCES `user` (`Username`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of trquestion
 -- ----------------------------
 INSERT INTO `trquestion` VALUES ('4', '呵呵', '1', '0', '2', '阿道夫', '阿道夫啊爱妃', '2016-02-23', '0');
 INSERT INTO `trquestion` VALUES ('5', '呵呵', '4', '1', '1', '啊啊啊', '睇到的的的的的爱的发啊发', '2016-02-27', '2');
+INSERT INTO `trquestion` VALUES ('6', '呵呵', '2', '1', '1', '发发爱的发爱妃啊', '阿道夫爱的发的发的爱的爱的啊啊啊发', '2016-03-01', '2');
+INSERT INTO `trquestion` VALUES ('7', '呵呵', '2', '1', '1', '发发爱的发爱妃啊', '飞阿发阿道夫爱上发的爱妃啊 打发发', '2016-03-01', '2');
 
 -- ----------------------------
 -- Table structure for `user`
@@ -356,12 +362,12 @@ CREATE TABLE `user` (
   `UserId` int(16) NOT NULL,
   `activated` tinyint(2) NOT NULL DEFAULT '0',
   `randomCode` varchar(255) DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`Username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('a', '222222', 'ari-sa@163.com', '11111111111', '1', '1', '86156907c7fac5b12852978a6959cb28');
-INSERT INTO `user` VALUES ('ä½ ', '111111', '1@333.com', '11111111111', '2', '0', null);
-INSERT INTO `user` VALUES ('呵呵', '123456', 'aririsa@163.com', '12345678901', '3', '1', null);
+INSERT INTO `user` VALUES ('tt', '676984c80e48287c1067961dc4229df3e709e8872b43ff6a', 'pellyxu@qq.com', '12344', '4', '1', 'cfe9bbbf615dc2eb29580075483399f3', '1457171338556.jpg');
+INSERT INTO `user` VALUES ('呵呵', '123456', 'aririsa@163.com', '12345678901', '3', '1', null, null);
